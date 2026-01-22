@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIMCARE Digital Technologies Pte Ltd</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- =====================================================
+     NAVBAR
+     ===================================================== -->
+    
+     <nav class="navbar navbar-scrolled">
+    <div class="container nav-container">
+
+        <div class="logo">
+        <a href="index.html" class="logo-button">
+            <img src="assets/images/logos/BDT logo.png" class="custom-logo" alt="BIMCARE Logo">
+            <div class="logo-text">
+            <h3>BIMCARE DIGITAL TECHNOLOGIES</h3>
+            <small>PTE LTD</small>
+            </div>
+        </a>
+        </div>
+
+        <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#clients">Clients</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <a href="#" class="btn-outline">Login</a>
+        <div class="hamburger"><i class="fa-solid fa-bars"></i></div>
+
+    </div>
+    </nav>
+
+<!-- =====================================================
+     HERO SECTION (SCROLL TRIGGER REFERENCE)
+     ===================================================== -->
+    <header id="home" class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="assets/videos/hero-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </header>
+
+<!-- =====================================================
+     ABOUT
+     ===================================================== -->
+    <section id="about" class="section">
+        <div class="container split-layout">
+            <div class="image-box">
+                <img src="assets/images/projects/about.png" alt="About Us">
+            </div>
+            <div class="text-box">
+            <h2>About Us</h2>
+
+            <!-- Always visible intro -->
+            <p class="highlight-text">
+                Bimcare Digital Technologies Pte. Ltd. (BDT) is a leading consultancy firm 
+                dedicated to enduring structures through a comprehensive suite of services.
+            </p>
+            
+            <!-- Collapsible content -->
+            <div class="about-more" id="aboutMore">
+                <p>
+                We exist to help clients achieve sustainability goals by harnessing the full potential
+                of BIM for long-term value by transforming traditional workflows into data-driven, 
+                collaborative, and future-ready processes.
+                </p>
+            </div>
+
+        </div>
+    </section>
+<!-- =====================================================
+     PROJECTS
+     ===================================================== -->
+    <section id="projects" class="section bg-light">
+        <div class="container split-layout reverse">
+            <div class="text-box">
+                <h2>Our Projects</h2>
+                <p>Explore our latest projects and see our expertise in action.</p>
+                <p>We have showcased our expertise in the hospitality, real estate, 
+                    and industrial sectors. Additionally, BCT has been a long-time player 
+                    in green building design.
+                </p>
+                <a href="projects.html" class="btn-primary">View Projects</a>
+            </div>
+            <div class="image-box">
+                <img src="assets/images/projects/cover-project.png" alt="Our Projects">
+            </div>
+        </div>
+    </section>
+
+<!-- =====================================================
+     SERVICES
+     ===================================================== -->
+    <section class="section" id="services">
+    <div class="container">
+
+        <div class="section-title">
+        <h2>Our Services</h2>
+        <p>Comprehensive BIM and engineering solutions tailored to your project needs</p>
+        </div>
+
+        <div class="services-grid">
+
+        <div class="service-card">
+            <i class="fas fa-cubes"></i>
+            <h3>BIM Modeling</h3>
+            <p>High-precision BIM models for design, coordination, and execution.</p>
+        </div>
+
+        <div class="service-card">
+            <i class="fas fa-tools"></i>
+            <h3>MEP Design</h3>
+            <p>Efficient MEP systems engineered for performance and sustainability.</p>
+        </div>
+
+        <div class="service-card">
+            <i class="fas fa-project-diagram"></i>
+            <h3>Clash Detection</h3>
+            <p>Early-stage clash identification to reduce rework and cost overruns.</p>
+        </div>
+
+        <div class="service-card">
+            <i class="fas fa-industry"></i>
+            <h3>Steel Detailing</h3>
+            <p>Accurate fabrication-ready steel detailing for complex structures.</p>
+        </div>
+
+        <div class="service-card">
+            <i class="fas fa-vr-cardboard"></i>
+            <h3>3D Visualization</h3>
+            <p>Photorealistic visuals and walkthroughs for stakeholder engagement.</p>
+        </div>
+
+        <div class="service-card">
+            <i class="fas fa-sitemap"></i>
+            <h3>Coordination Modeling</h3>
+            <p>Multi-discipline coordination models ensuring seamless execution.</p>
+        </div>
+
+        </div>
+    </div>
+    </section>
+
+
+
+
+<!-- ====================================================
+        CLIENTS
+===================================================== -->
+    <section id="clients" class="section bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Clients</h2>
+                <p>We're proud to work with industry leaders and innovators across various sectors.</p>
+            </div>
+            
+            <div class="clients-grid">
+
+                <a ref="https://www.tata.com" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/TATA.png" alt="TATA Group">
+                </a>
+
+                 <a ref="https://www.hondacarindia.com" target="_blank"
+                     class="client-box">
+                     <img src="assets/images/logos/Honda.png" alt="Honda India">
+                </a>
+
+                <a ref="https://www.kia.com/in" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/KIA.png" alt="KIA India">
+                </a>
+
+                <a ref="https://www.hyundai.com/in" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/Hundai.png" alt="Hyundai India">
+                </a>
+
+                <a ref="https://www.apollohospitals.com" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/apollo.svg" alt="Apollo Hospitals">
+                </a>
+
+                <a ref="https://www.akshayapatra.org" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/AkshayaPatra.png" alt="Akshaya Patra">
+                </a>
+
+                <a ref="https://www.kecrpg.com" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/kec.png" alt="KEC International">
+                </a>
+
+                <a ref="https://www.caparo.co.in" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/Caparo.svg" alt="Caparo India">
+                </a>
+
+                <a ref="https://spaceair.in" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/SpaceAir.png" alt="Space Air">
+                </a>
+
+                <a ref="https://www.srf.com" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/SRF.png" alt="SRF Limited">
+                </a>
+
+                <a ref="https://cresconprojects.com" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/Crescon.png" alt="Crescon Projects">
+                </a>
+
+                <a ref="https://www.firetrixengineering.com" target="_blank"
+                    class="client-box">
+                    <img src="assets/images/logos/Firetrix.png" alt="Firetrix Engineering">
+                </a>
+            </div>
+            </div>
+        </section>
+<!-- =====================================================
+     SOFTWARES USED
+===================================================== -->
+    
+    <section id="softwares" class="section bg-light">
+    <div class="container">
+
+        <div class="section-title">
+        <h2>Softwares Used</h2>
+        <p>Industry-standard tools powering our BIM and engineering workflows</p>
+        </div>
+
+        <div class="softwares-grid">
+
+        <div class="software-box"><img src="assets/images/logos/revit.png" alt="Autodesk Revit"></div>
+
+        <div class="software-box"><img src="assets/images/logos/autocad.png" alt="AutoCAD"></div>
+
+        <div class="software-box"><img src="assets/images/logos/naviswork.png" alt="Navisworks"></div>
+
+        <div class="software-box"><img src="assets/images/logos/sketchup.png" alt="SketchUp"></div>
+
+        <div class="software-box"><img src="assets/images/logos/lumion.png" alt="Lumion"></div>
+
+        <div class="software-box"><img src="assets/images/logos/ansys.png" alt="ANSYS"></div>
+
+        <div class="software-box"><img src="assets/images/logos/solidworks.png" alt="SolidWorks"></div>
+
+        <div class="software-box"><img src="assets/images/logos/staad pro.png" alt="STAAD Pro"></div>
+
+    </div>
+    </section>
+
+
+<!-- =====================================================
+        CONTACT
+    ===================================================== -->
+    <section id="contact" class="section">
+    <div class="container">
+
+        <div class="section-title">
+        <h2>Contact Us</h2>
+        <p>Get in touch with our team</p>
+        </div>
+
+        <div class="split-layout contact-layout">
+
+        <div class="contact-form">
+            <h3>Send us a message</h3>
+
+            <form id="mailtoForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <input type="text" id="subject" placeholder="Subject">
+                <textarea id="message" rows="5" placeholder="Message" required></textarea>
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+        </div>
+
+
+        <div class="contact-info">
+            <h3>Contact Information</h3>
+            <div class="info-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+                <strong>Phone</strong>
+                <p>+65 88405099</p>
+            </div>
+            </div>
+            <div class="info-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+                <strong>Address</strong>
+                <p>Bimcare Digital Technologies Pte Ltd</p>
+                <p>67 Ubi Road 1, Singapore 408730</p>
+            </div>
+            </div>
+            <div class="info-item">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+                <strong>Email</strong>
+                <p>services@bimcaredigital.com</p>
+            </div>
+            </div>
+            <div class="info-item">
+            <i class="fa-solid fa-globe"></i>
+            <div>
+                <strong>Website</strong>
+                <p>
+                <a href="https://www.bctech.in" target="_blank" rel="noopener noreferrer">
+                    www.bctech.in
+                </a>
+                </p>
+            </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    </section>
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-left">
+                <img src="assets/images/logos/BDT logo.png" alt="BIMCARE Logo" class="footer-logo">
+                <div>
+                    <h4>BIMCARE DIGITAL TECHNOLOGIES</h4>
+                    <small> PTE LTD</small>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links<h4>
+                <ul>
+                    <li><a href="#about">Our Story</a></li>
+                    <li><a href="#">Join our Crew</a></li>
+                    <li><a href="#">Newsroom</a></li>
+                    <li><a href="#clients">Partner with us</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright © 2025 Bimcare Digital Technologies Pte Ltd.</p>
+        </div>
+    </footer>
+
+<!-- =====================================================
+     SCRIPT
+     ===================================================== -->
+<script src="script.js"></script>
+
+</body>
+</html>

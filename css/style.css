@@ -1,0 +1,768 @@
+@charset "UTF-8";
+/* =====================================================
+   1. GLOBAL RESET & ROOT VARIABLES
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+:root {
+  --primary-color: #2563EB;
+  --dark-bg: #1F2937;
+  --light-bg: #F3F4F6;
+  --text-color: #1E3A8A;
+  --heading-color: #1E40AF;
+}
+
+/* =====================================================
+   2. BASE ELEMENT STYLES
+   ===================================================== */
+body {
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* =====================================================
+   3. LAYOUT UTILITIES
+   ===================================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.bg-light {
+  background-color: var(--light-bg);
+}
+
+/* =====================================================
+   SCROLL SECTION ANIMATION (UP-RISE / DOWN-FALL)
+   ===================================================== */
+.section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* =====================================================
+   SCROLL SECTION ANIMATION (SINGLE SOURCE OF TRUTH)
+   ===================================================== */
+.section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section.is-exiting {
+  opacity: 0.85;
+  transform: translateY(-20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+/* =====================================================
+   4. NAVBAR & LOGO
+   ===================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 0;
+  color: white;
+  background-color: transparent;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.3s ease;
+}
+.navbar .nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.navbar .logo-button {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.navbar .logo-button:hover .custom-logo {
+  transform: rotate(10deg) scale(1.1);
+  border-color: #fff;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.6), 0 0 25px rgba(59, 130, 246, 0.4), 0 0 40px rgba(59, 130, 246, 0.25);
+}
+.navbar .custom-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 2px solid #3B82F6;
+  background-color: #fff;
+  padding: 2px;
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+.navbar .logo-text h1 {
+  font-size: 1.5rem;
+  color: #3B82F6;
+  margin-bottom: -5px;
+  transition: color 0.3s ease;
+}
+.navbar .logo-text small {
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  color: #60A5FA;
+  transition: color 0.3s ease;
+}
+.navbar .nav-links {
+  display: flex;
+  gap: 20px;
+}
+.navbar .nav-links a {
+  position: relative;
+  font-weight: 500;
+  color: #E0F2FE;
+  transition: color 0.3s ease;
+}
+.navbar .nav-links a:hover {
+  color: #fff;
+}
+.navbar .nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background-color: #93C5FD;
+}
+.navbar .btn-outline {
+  color: #BFDBFE;
+  border-color: #BFDBFE;
+}
+.navbar .hamburger {
+  display: none;
+  cursor: pointer;
+}
+.navbar.navbar-scrolled {
+  background-color: rgba(30, 58, 138, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+}
+.navbar.navbar-scrolled .nav-links a {
+  color: #fff;
+}
+.navbar.navbar-scrolled .nav-links a:hover {
+  color: #93C5FD;
+}
+.navbar.navbar-scrolled .btn-outline {
+  color: #fff;
+  border-color: #fff;
+}
+.navbar.navbar-scrolled .btn-outline:hover {
+  background-color: #fff;
+  color: #1E3A8A;
+}
+.navbar.navbar-scrolled .logo-text h1 {
+  color: #fff;
+}
+.navbar.navbar-scrolled .logo-text small {
+  color: #BFDBFE;
+}
+
+/* =====================================================
+   5. BUTTONS (HOVER AURA)
+   ===================================================== */
+.btn-primary,
+.btn-outline {
+  position: relative;
+  z-index: 1;
+  transition: box-shadow 0.35s ease, transform 0.25s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 28px; /* adjust: 20px–40px as needed */
+}
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  border: 1px solid #3B82F6;
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: #3B82F6;
+}
+.btn-outline:hover {
+  background-color: #3B82F6;
+  color: #fff;
+}
+
+.btn-primary:hover,
+.btn-outline:hover {
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.6), 0 0 22px rgba(59, 130, 246, 0.4), 0 0 36px rgba(59, 130, 246, 0.25);
+}
+
+/* =====================================================
+   6. HERO SECTION
+   ===================================================== */
+.hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
+}
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+/* =====================================================
+   HERO TEXT – STAGGER ANIMATION
+   ===================================================== */
+.hero-overlay .hero-content {
+  text-align: center;
+  /* Stagger timing */
+}
+.hero-overlay .hero-content > * {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroFadeUp 0.8s ease forwards;
+}
+.hero-overlay .hero-content > *:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.hero-overlay .hero-content > *:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.hero-overlay .hero-content > *:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.hero-overlay .hero-content > *:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+/* Keyframes */
+@keyframes heroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Accessibility: Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-overlay .hero-content > * {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+/* =====================================================
+   7. SPLIT LAYOUT
+   ===================================================== */
+.split-layout {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.split-layout.reverse {
+  flex-direction: row-reverse;
+}
+.split-layout .image-box,
+.split-layout .text-box {
+  flex: 1;
+}
+.split-layout img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* =====================================================
+   8. MAP SECTION (AURA CARD)
+   ===================================================== */
+.map-section {
+  background: #fff;
+  padding-bottom: 80px;
+}
+.map-section .map-wrapper {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #EFF6FF;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.map-section .map-wrapper:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.18), 0 0 18px rgba(59, 130, 246, 0.35), 0 0 36px rgba(59, 130, 246, 0.25);
+}
+
+/* =====================================================
+   9. SERVICES SECTION
+   ===================================================== */
+
+.section {
+  padding: 80px 0;
+  overflow: visible;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===================== TITLE ===================== */
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.section-title p {
+  font-size: 16px;
+  color: #475569;
+}
+
+/* ===================== GRID ===================== */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  overflow: visible;
+}
+
+/* ===================== SERVICE CARD ===================== */
+
+.service-card {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  z-index: 1;
+
+  background: #ffffff;
+  padding: 34px 28px;
+  border-radius: 14px;
+  text-align: center;
+
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  transition: transform 0.35s ease;
+}
+
+/* ===================== ICON ===================== */
+
+.service-card i {
+  font-size: 36px;
+  margin-bottom: 18px;
+  color: #0ea5a4; /* Teal default */
+}
+
+/* ===================== TEXT ===================== */
+
+.service-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.service-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* ===================== AURA EFFECT ===================== */
+
+.service-card::after {
+  content: "";
+  position: absolute;
+  inset: -22px;
+  border-radius: inherit;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(var(--aura-color), 0.45),
+    rgba(var(--aura-color), 0.18),
+    transparent 65%
+  );
+
+  opacity: 0;
+  filter: blur(22px);
+  transform: scale(0.9);
+
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ===================== HOVER ===================== */
+
+.service-card:hover::after {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.service-card:hover {
+  transform: translateY(-12px) scale(1.04);
+}
+
+/* ===================== SPOTLIGHT ===================== */
+
+.services-grid:hover .service-card {
+  opacity: 0.45;
+  transform: scale(0.96);
+}
+
+.services-grid:hover .service-card:hover {
+  opacity: 1;
+  transform: translateY(-12px) scale(1.05);
+  z-index: 5;
+}
+
+
+/* =====================================================
+   10. CLIENTS SECTION
+   ===================================================== */
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-top: 40px;
+}
+.clients-grid .client-box {
+  background: #ffffff;
+  aspect-ratio: 1/0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1.5px solid #DBEAFE;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.clients-grid .client-box:hover {
+  transform: translateY(-5px);
+  border-color: #3B82F6;
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.1);
+}
+.clients-grid .client-box img {
+  width: 85%;
+  height: 85%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.client-box {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* Aura halo */
+.client-box::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(var(--aura-color), 0.35),
+    rgba(var(--aura-color), 0.15),
+    transparent 65%
+  );
+  opacity: 0;
+  filter: blur(22px);
+  transition: opacity 0.4s var(--ease-standard),
+              transform 0.4s var(--ease-standard);
+  z-index: -1;
+}
+
+.client-box:hover::after {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.clients-grid:hover .client-box {
+  opacity: 0.45;
+  filter: grayscale(0.2);
+  transform: scale(0.95);
+}
+
+.clients-grid:hover .client-box:hover {
+  opacity: 1;
+  filter: none;
+  transform: translateY(-10px) scale(1.05);
+  z-index: 5;
+}
+
+/* =====================================================
+   SOFTWARES USED SECTION
+===================================================== */
+
+.softwares-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* ✅ 4 columns */
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.software-box {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+
+  height: 140px;              /* ✅ FIXED HEIGHT */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1.5px solid #DBEAFE;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.software-box img {
+  max-width: 80%;
+  max-height: 70px;     /* ✅ LOGO HEIGHT CONTROL */
+  object-fit: contain; /* 🔒 Keeps original ratio */
+
+  filter: grayscale(0.2);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+
+.software-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.15);
+}
+
+.software-box:hover img {
+  filter: none;
+  transform: scale(1.05);
+}
+
+
+/* =====================================================
+   11. CONTACT SECTION
+   ===================================================== */
+.contact-layout {
+  align-items: flex-start;
+}
+.contact-layout .contact-form,
+.contact-layout .contact-info {
+  flex: 1;
+}
+.contact-layout h3 {
+  color: var(--heading-color);
+  margin-bottom: 15px;
+}
+.contact-layout input,
+.contact-layout textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #BFDBFE;
+  border-radius: 5px;
+}
+.contact-layout .contact-info {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+.contact-layout .contact-info .info-item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+.contact-layout .contact-info .info-item strong {
+  color: var(--heading-color);
+}
+.contact-layout .contact-info .info-item i {
+  color: var(--primary-color);
+  margin-top: 5px;
+}
+
+/* =====================================================
+   12. CONTACT SECTION – FLOATING CARDS WITH AURA (UPDATED)
+   ===================================================== */
+
+.contact-layout .contact-form,
+.contact-layout .contact-info {
+  background: #EFF6FF; /* 🔵 Light blue card background */
+  border-radius: 14px;
+  padding: 35px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  position: relative;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.contact-layout .contact-form:hover,
+.contact-layout .contact-info:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.18), 0 0 18px rgba(59, 130, 246, 0.35), 0 0 36px rgba(59, 130, 246, 0.25);
+}
+
+/* =====================================================
+   13. FOOTER (NAVBAR-STYLE BEHAVIOR)
+   ===================================================== */
+footer {
+  background-color: #1E3A8A;
+  color: white;
+  padding: 30px 0 15px;
+  transition: background-color 0.4s ease, padding 0.3s ease;
+}
+footer:hover {
+  padding: 26px 0 12px;
+  background-color: rgba(30, 58, 138, 0.98);
+}
+footer .footer-content {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 40px;
+  border-bottom: 1px solid #3B82F6;
+  padding-bottom: 20px;
+}
+footer .footer-left {
+  display: flex;
+  gap: 15px;
+  cursor: pointer;
+}
+footer .footer-left .footer-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #60A5FA;
+  background: #fff;
+  padding: 2px;
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+footer .footer-left:hover .footer-logo {
+  transform: rotate(10deg) scale(1.1);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6), 0 0 24px rgba(147, 197, 253, 0.45), 0 0 40px rgba(147, 197, 253, 0.25);
+}
+footer .footer-links {
+  text-align: center;
+}
+footer .footer-links ul {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+footer .footer-links a {
+  position: relative;
+  color: #E0F2FE;
+}
+footer .footer-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: #93C5FD;
+  transition: width 0.3s ease;
+}
+footer .footer-links a:hover::after {
+  width: 100%;
+}
+footer .footer-social {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+footer .footer-social i {
+  width: 36px;
+  height: 36px;
+  background: #2563EB;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+footer .footer-social i:hover {
+  transform: translateY(-2px);
+}
+footer .copyright {
+  text-align: center;
+  padding-top: 12px;
+  font-size: 0.8rem;
+  color: #BFDBFE;
+}
+
+/* =====================================================
+   FIX: CENTER SERVICES & CLIENTS GRIDS
+   ===================================================== */
+.services-grid,
+.clients-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
