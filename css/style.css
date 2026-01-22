@@ -240,69 +240,42 @@ ul {
 .hero {
   position: relative;
   width: 100%;
-  height: 100vh;
   background: #000;
+  padding-top: 72px; /* space for fixed navbar */
+}
+
+/* Video behaves like image, not background */
+.hero-video {
+  width: 100%;
+  height: auto;        /* 🔑 THIS FIXES MOBILE */
+  display: block;
+  object-fit: contain;
+  background: #000;
+}
+
+/* Overlay text */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-}
-/* ✅ DEFAULT: Desktop */
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Desktop can afford cropping */
+  text-align: center;
+  padding: 1rem;
+  color: #fff;
+  pointer-events: none;
 }
 
-/* 🟢 MOBILE FIX (IMPORTANT) */
-@media (max-width: 768px) {
+/* Desktop enhancement only */
+@media (min-width: 1024px) {
   .hero {
-    height: auto;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
+    min-height: 100vh;
   }
 
   .hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
-    object-fit: contain; /* ✅ NO CUT, FULL VIDEO */
-    background: #000;
+    object-fit: cover; /* cinematic desktop */
   }
-}
-
-/* Optional overlay text */
-.hero-overlay {
-  position: absolute;
-  z-index: 2;
-  color: #fff;
-  text-align: center;
-  padding: 1rem;
-}
-/* =====================================================
-   HERO TEXT – STAGGER ANIMATION
-   ===================================================== */
-.hero-overlay .hero-content {
-  text-align: center;
-  /* Stagger timing */
-}
-.hero-overlay .hero-content > * {
-  opacity: 0;
-  transform: translateY(24px);
-  animation: heroFadeUp 0.8s ease forwards;
-}
-.hero-overlay .hero-content > *:nth-child(1) {
-  animation-delay: 0.2s;
-}
-.hero-overlay .hero-content > *:nth-child(2) {
-  animation-delay: 0.4s;
-}
-.hero-overlay .hero-content > *:nth-child(3) {
-  animation-delay: 0.6s;
-}
-.hero-overlay .hero-content > *:nth-child(4) {
-  animation-delay: 0.8s;
 }
 
 /* Keyframes */
@@ -340,24 +313,6 @@ ul {
   width: 100%;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* =====================================================
-   8. MAP SECTION (AURA CARD)
-   ===================================================== */
-.map-section {
-  background: #fff;
-  padding-bottom: 80px;
-}
-.map-section .map-wrapper {
-  border-radius: 16px;
-  overflow: hidden;
-  background: #EFF6FF;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-.map-section .map-wrapper:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.18), 0 0 18px rgba(59, 130, 246, 0.35), 0 0 36px rgba(59, 130, 246, 0.25);
 }
 
 /* =====================================================
