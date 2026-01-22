@@ -238,33 +238,48 @@ ul {
    6. HERO SECTION
    ===================================================== */
 .hero {
-  height: 100vh;
   position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
+/* ✅ DEFAULT: Desktop */
 .hero-video {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  z-index: -1;
-}
-.hero-overlay {
-  background: rgba(0, 0, 0, 0.3);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  object-fit: cover; /* Desktop can afford cropping */
 }
 
+/* 🟢 MOBILE FIX (IMPORTANT) */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+  }
+
+  .hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* ✅ NO CUT, FULL VIDEO */
+    background: #000;
+  }
+}
+
+/* Optional overlay text */
+.hero-overlay {
+  position: absolute;
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
 /* =====================================================
    HERO TEXT – STAGGER ANIMATION
    ===================================================== */
