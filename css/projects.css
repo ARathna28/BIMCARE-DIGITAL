@@ -26,7 +26,7 @@
 }
 
 /* =====================================================
-   2. BASE STYLES
+   2. BASE ELEMENTS
 ===================================================== */
 body {
   color: var(--dark);
@@ -46,6 +46,17 @@ ul {
 /* =====================================================
    3. LAYOUT UTILITIES
 ===================================================== */
+.page-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+  padding-top: 65px; /* navbar clearance */
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -87,8 +98,8 @@ ul {
 
 .logo-button {
   display: flex;
-  gap: 15px;
   align-items: center;
+  gap: 15px;
 }
 
 .custom-logo {
@@ -110,12 +121,12 @@ ul {
 
 .nav-links a.active::after {
   content: "";
-  height: 2px;
-  background: #93c5fd;
-  width: 100%;
   position: absolute;
   bottom: -6px;
   left: 0;
+  width: 100%;
+  height: 2px;
+  background: #93c5fd;
 }
 
 .btn-outline {
@@ -125,93 +136,23 @@ ul {
   color: #93c5fd;
 }
 
-/* ===============================
-  5. BREADCRUMB FIX – PROJECTS PAGE
-================================ */
-
-.breadcrumb-nav {
-  margin-top: 120px;          /* push below navbar properly */
-  background: var(--surface);
-  padding: 16px 0;
-}
-
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.breadcrumb a {
-  color: var(--primary);
-  font-weight: 500;
-}
-
-.breadcrumb-separator {
-  opacity: 0.6;
-}
-
-.breadcrumb-nav {
-  border-bottom: 1px solid var(--border);
-}
-
 /* =====================================================
-   7. PROJECTS GRID
+   5. PROJECTS GRID
 ===================================================== */
 #projects-list {
   position: relative;
   z-index: 2;
 }
 
-.page-header + .section {
-  margin-top: 60px;
-}
-
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 35px;
+  margin-top: 20px;
 }
 
 /* =====================================================
-   8. STANDARD PROJECT CARD
-===================================================== */
-.project-card {
-  background: #ffffff;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.2);
-}
-
-.project-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-
-.project-info {
-  padding: 22px;
-}
-
-.project-info h3 {
-  font-size: 18px;
-  margin-bottom: 6px;
-}
-
-.project-info p {
-  font-size: 14px;
-  color: var(--muted);
-}
-
-/* =====================================================
-   9. PREMIUM PROJECT CARD
+   6. PROJECT CARD (PREMIUM)
 ===================================================== */
 .project-card-pro {
   background: #ffffff;
@@ -221,21 +162,29 @@ ul {
   flex-direction: column;
   box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  perspective: 1000px;
 }
 
 .project-card-pro:hover {
-  transform: translateY(-12px);
+  transform: translateY(-12px) rotateX(2deg);
   box-shadow: 0 28px 70px rgba(15, 23, 42, 0.25);
 }
 
+/* ---------- IMAGE ---------- */
 .card-image {
   position: relative;
+  overflow: hidden;
 }
 
 .card-image img {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.project-card-pro:hover .card-image img {
+  transform: scale(1.12) translateY(-6px);
 }
 
 .card-badge {
@@ -247,9 +196,9 @@ ul {
   font-size: 12px;
   padding: 6px 12px;
   border-radius: 999px;
-  letter-spacing: 0.4px;
 }
 
+/* ---------- CONTENT ---------- */
 .card-content {
   padding: 22px 22px 10px;
 }
@@ -265,6 +214,7 @@ ul {
   color: var(--muted);
 }
 
+/* ---------- FOOTER ---------- */
 .card-footer {
   margin-top: auto;
   padding: 16px 22px 20px;
@@ -290,33 +240,160 @@ ul {
 }
 
 /* =====================================================
-   10. FOOTER
+   7. PROJECT SHOWCASE MODAL
+===================================================== */
+.project-showcase {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 3000;
+}
+
+.project-showcase.active {
+  display: block;
+}
+
+.showcase-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.showcase-panel {
+  position: relative;
+  max-width: 1100px;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 40px;
+  box-shadow: 0 40px 120px rgba(15, 23, 42, 0.35);
+  animation: slideUp 0.6s cubic-bezier(.22,.61,.36,1);
+}
+
+/* ---------- GRID ---------- */
+.showcase-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ---------- IMAGES ---------- */
+.showcase-images {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.showcase-images img {
+  width: 100%;
+  max-height: 32vh;
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+/* ---------- CONTENT ---------- */
+.showcase-content {
+  position: sticky;
+  top: 20px;
+}
+
+.showcase-content h2 {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+.showcase-content ul {
+  padding-left: 20px;
+}
+
+.showcase-content li {
+  font-size: 18px;
+  margin-bottom: 14px;
+  text-align: justify;
+  animation: pointFade 0.45s ease forwards;
+}
+
+/* ---------- META ---------- */
+.showcase-meta {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 26px;
+}
+
+.meta-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.meta-value {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =====================================================
+   8. FOOTER
 ===================================================== */
 footer {
-  background: #1e3a8a;
+  background-color: #1e3a8a;
   color: #ffffff;
-  padding: 30px 0;
+  padding: 30px 0 15px;
 }
 
 .footer-content {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: 40px;
-  align-items: center;
+  border-bottom: 1px solid #3b82f6;
+  padding-bottom: 20px;
 }
 
-.footer-social i {
-  background: #2563eb;
-  width: 36px;
-  height: 36px;
+.footer-logo {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
+}
+
+.footer-links ul {
   display: flex;
-  align-items: center;
+  gap: 30px;
   justify-content: center;
 }
 
+.footer-social {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+footer .copyright {
+  text-align: center;
+  padding-top: 12px;
+  font-size: 0.8rem;
+  color: #bfdbfe;
+}
+
 /* =====================================================
-   11. RESPONSIVE
+   9. ANIMATIONS
+===================================================== */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes pointFade {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   10. RESPONSIVE
 ===================================================== */
 @media (max-width: 1024px) {
   .projects-grid {
@@ -324,50 +401,19 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+  .projects-grid,
+  .showcase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .showcase-images {
+    max-height: 45vh;
+  }
+}
+
 @media (max-width: 600px) {
   .projects-grid {
     grid-template-columns: 1fr;
   }
-
-  .header-content h2 {
-    font-size: 32px;
-  }
-}
-
-/* =====================================
-   IMAGE ZOOM + PARALLAX EFFECT
-===================================== */
-
-.card-image {
-  overflow: hidden;
-}
-
-.card-image img {
-  transform: scale(1);
-  transition: transform 0.8s ease;
-}
-
-/* Zoom on hover */
-.project-card-pro:hover .card-image img {
-  transform: scale(1.12) translateY(-6px);
-}
-
-/* Depth illusion */
-.project-card-pro {
-  perspective: 1000px;
-}
-
-.project-card-pro:hover {
-  transform: translateY(-12px) rotateX(2deg);
-}
-
-
-.page-layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.page-content {
-  flex: 1;
 }
