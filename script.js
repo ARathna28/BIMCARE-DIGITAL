@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =====================================================
-     1. ELEMENT REFERENCES
+     1. ELEMENT REFERENCES (SAFE)
   ===================================================== */
 
   const navbar     = document.querySelector(".navbar");
@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const navItems   = document.querySelectorAll(".nav-links a");
   const sections   = document.querySelectorAll("section[id]");
   const auraCards  = document.querySelectorAll(".service-card, .client-box");
-
   const mailForm   = document.getElementById("mailtoForm");
 
 
@@ -22,8 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hamburger) {
     hamburger.setAttribute("role", "button");
     hamburger.setAttribute("tabindex", "0");
+    hamburger.setAttribute("aria-expanded", "false");
 
-    hamburger.addEventListener("keydown", (e) => {
+    hamburger.addEventListener("keydown", e => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         hamburger.click();
@@ -49,7 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
   ===================================================== */
 
   const updateNavbarState = () => {
-    if (!navbar || !hero) return;
+    if (!navbar) return;
+
+    if (!hero) {
+      navbar.classList.add("navbar-scrolled");
+      return;
+    }
+
     navbar.classList.toggle(
       "navbar-scrolled",
       window.scrollY >= hero.offsetHeight / 2
@@ -65,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let activeSection = "";
 
     sections.forEach(section => {
-      if (window.scrollY >= section.offsetTop - 140) {
+      if (window.scrollY >= section.offsetTop - 160) {
         activeSection = section.id;
       }
     });
@@ -100,19 +106,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =====================================================
-     7. SMOOTH SCROLL + AUTO CLOSE MENU
+     7. SMOOTH SCROLL (CENTER TARGET)
   ===================================================== */
 
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
+  document.querySelectorAll('.nav-scroll').forEach(link => {
     link.addEventListener("click", e => {
-      const target = document.querySelector(link.getAttribute("href"));
+      e.preventDefault();
+
+      const targetId = link.getAttribute("href");
+      const target = document.querySelector(targetId);
       if (!target) return;
 
-      e.preventDefault();
       navLinks?.classList.remove("active");
       hamburger?.setAttribute("aria-expanded", "false");
 
-      target.scrollIntoView({ behavior: "smooth" });
+      const navbarHeight = navbar?.offsetHeight || 0;
+      const targetRect = target.getBoundingClientRect();
+      const targetCenter =
+        targetRect.top + window.pageYOffset + targetRect.height / 2;
+      const viewportCenter = window.innerHeight / 2;
+
+      window.scrollTo({
+        top: targetCenter - viewportCenter - navbarHeight / 2,
+        behavior: "smooth"
+      });
     });
   });
 
@@ -121,8 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
      8. SECTION SCROLL ANIMATIONS
   ===================================================== */
 
-  const sectionObserver = new IntersectionObserver(
-    entries => {
+  if ("IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         entry.target.classList.toggle("is-visible", entry.isIntersecting);
         entry.target.classList.toggle(
@@ -130,11 +147,13 @@ document.addEventListener("DOMContentLoaded", () => {
           !entry.isIntersecting && entry.boundingClientRect.top < 0
         );
       });
-    },
-    { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
-  );
+    }, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -80px 0px"
+    });
 
-  sections.forEach(section => sectionObserver.observe(section));
+    sections.forEach(section => sectionObserver.observe(section));
+  }
 
 
   /* =====================================================
@@ -144,8 +163,14 @@ document.addEventListener("DOMContentLoaded", () => {
   auraCards.forEach(card => {
     card.addEventListener("mousemove", e => {
       const rect = card.getBoundingClientRect();
-      card.style.setProperty("--mouse-x", `${((e.clientX - rect.left) / rect.width) * 100}%`);
-      card.style.setProperty("--mouse-y", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+      card.style.setProperty(
+        "--mouse-x",
+        `${((e.clientX - rect.left) / rect.width) * 100}%`
+      );
+      card.style.setProperty(
+        "--mouse-y",
+        `${((e.clientY - rect.top) / rect.height) * 100}%`
+      );
     });
 
     card.addEventListener("mouseleave", () => {
@@ -156,35 +181,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =====================================================
-     10. ESC KEY + FOCUS TRAP (ACCESSIBILITY)
+     10. ESC KEY HANDLING
   ===================================================== */
 
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && navLinks?.classList.contains("active")) {
-      navLinks.classList.remove("active");
-      hamburger?.setAttribute("aria-expanded", "false");
-      hamburger?.focus();
+    if (e.key === "Escape") {
+
+      if (navLinks?.classList.contains("active")) {
+        navLinks.classList.remove("active");
+        hamburger?.setAttribute("aria-expanded", "false");
+        hamburger?.focus();
+      }
+
     }
   });
 
 
-/* =====================================================
-   11. CONTACT FORM – NAME + EMAIL FIRST, THEN MESSAGE
-===================================================== */
+  /* =====================================================
+     11. CONTACT FORM (GMAIL COMPOSE)
+  ===================================================== */
 
   if (mailForm) {
     mailForm.addEventListener("submit", e => {
       e.preventDefault();
 
-      const name    = document.getElementById("name").value.trim();
-      const email   = document.getElementById("email").value.trim();
-      const subject = document.getElementById("subject").value || "Website Enquiry";
-      const message = document.getElementById("message").value.trim();
+      const name    = document.getElementById("name")?.value.trim();
+      const email   = document.getElementById("email")?.value.trim();
+      const subject = document.getElementById("subject")?.value || "Website Enquiry";
+      const message = document.getElementById("message")?.value.trim();
 
-      // ✅ Exact body structure you want
-      const body = `${name} 
+      if (!name || !email || !message) return;
+
+      const body = `${name}
 ${email}
-      
+
 ${message}`;
 
       const gmailURL =
