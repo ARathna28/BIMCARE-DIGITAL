@@ -219,7 +219,7 @@ ${message}`;
 
       const gmailURL =
         "https://mail.google.com/mail/?view=cm&fs=1" +
-        "&to=hariraj.bct@gmail.com" +
+        "&to=services@bimcaredigital.com" +
         "&su=" + encodeURIComponent(subject) +
         "&body=" + encodeURIComponent(body);
 
